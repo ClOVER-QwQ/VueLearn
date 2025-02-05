@@ -10,28 +10,38 @@
 </template>
 
 <script lang="ts" setup name="Person">
-import {ref, watch} from "vue";
+import {reactive,watch} from "vue";
+import type {personInf} from "@/types";
 
-let person =ref({name:"张三",age:30})
+let person =reactive<personInf>({
+  name:"张三",
+  age:30,
+  tel:18726255555
+})
 
 function changeName(){
-  person.value.name = person.value.name + "~"
+  person.name = person.name + "~"
 }
 
 function changeAge(){
-  person.value.age++
+  person.age++
 }
 
 function changePerson(){
-  person.value = {name:"李四",age:32}
+  Object.assign(person,{name:"李四",
+    age:55,
+    car:{
+      car1:"奔驰",
+      car2:"宝马"
+    }})
 }
 
-watch(person,(newValue, oldValue)=>{
-  console.log("person变化了",newValue,oldValue)
+watch([()=>person.name],(newValue, oldValue)=>{
+  console.log("person.name变化了",newValue,oldValue)
 },{deep:true})
 </script>
 
-<style>
+<style scoped>
 /*样式*/
 .person{
   background:blanchedalmond;
