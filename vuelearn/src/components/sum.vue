@@ -8,24 +8,9 @@
 </template>
 
 <script lang="ts" setup name="Sum">
-import {ref, watchEffect} from "vue";
+import useSum from "@/hooks/useSum.ts";
 
-let temp = ref(10)
-let height = ref(0)
-
-function changeTemp(){
-  temp.value = temp.value + 10
-}
-
-function changeHeight(){
-  height.value++
-}
-
-watchEffect(()=>{
-  if (temp.value >= 60||height.value >= 60){
-    console.log("给服务器发请求")
-  }
-})
+const {temp,height,changeHeight,changeTemp} = useSum()
 </script>
 
 <style scoped>
