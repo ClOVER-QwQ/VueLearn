@@ -1,12 +1,14 @@
 <template>
   <!--html!-->
-  <Count/>
-  <Person/>
+  <Game v-slot="{games}">
+    <ol v-for="game in games">
+      <li>{{game.name}}</li>
+    </ol>
+  </Game>
 </template>
 
 <script lang="ts" name="App" setup>
-import Person from "@/components/person.vue";
-import Count from "@/components/count.vue";
+import Game from "@/components/game.vue";
 </script>
 
 <style>
